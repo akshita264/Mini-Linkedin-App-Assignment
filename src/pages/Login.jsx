@@ -10,9 +10,14 @@ export default function Login() {
   const navigate = useNavigate();
   const { fetchUser } = useAuth();
 
+  
   const handleLogin = async () => {
     try {
-      const res = await axios.post('/auth/login', form);
+        const res = await axios.post('/auth/login', form, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
       localStorage.setItem('token', res.data.token);
       await fetchUser();
       setToast('Logged in');
